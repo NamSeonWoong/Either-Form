@@ -11,5 +11,7 @@ urlpatterns = [
 
     path('<int:id>/delete/',views.delete,name="delete"),
     
-    path('<int:id>/choices/create',views.choice_create, name="choice_create"),
+    path('<int:id>/choices/create/',views.choice_create, name="choice_create"),
+
+    path('<int:question_id>/choices/<int:choice_id>/delete/',views.choice_delete, name="choice_delete"),
 ]

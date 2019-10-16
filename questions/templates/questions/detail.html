@@ -4,6 +4,12 @@
   <div class="jumbotron">
     <h1 class="display-4">{{question.title}}</h1>
     <p class="lead">{{question.choice_1}} VS {{question.choice_2}}</p>
+
+    <div class="progress my-3">
+      <div class="progress-bar" role="progressbar" style="width: {{persent_1}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{persent_1|floatformat}}</div>
+      <div class="progress-bar bg-danger" role="progressbar" style="width: {{persent_2}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{persent_2|floatformat}}</div>
+    </div>
+
     <a href="{% url 'questions:update' question.id %}" class="btn btn-info">수정하기!!</a>
     <form action="{% url 'questions:delete' question.id %}" method="post" class="d-inline">
       {% csrf_token %}
@@ -21,14 +27,16 @@
     </form>
     {% for  choice in question.choice_set.all %}
       {% if choice.pick == 1 %}
-        <div class="alert alert-primary" role="alert">
+          <div class="alert alert-primary" role="alert">
+        {% else %}
+          <div class="alert alert-danger" role="alert">
+        {% endif %}
           {{choice.comment}}
+          <form action="{% url 'questions:choice_delete' question.id choice.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="삭제" class="btn btn-dark">
+          </form>
         </div>  
-      {% else %}
-        <div class="alert alert-danger" role="alert">
-          {{choice.comment}}
-        </div>
-      {% endif %}
     {% endfor %}
   </div>
   
