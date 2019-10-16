@@ -3,7 +3,7 @@
   <div class="jumbotron">
     <h1 class="display-4">{{question.title}}</h1>
     <p class="lead">{{question.choice_1}} VS {{question.choice_2}}</p>
-    <a href="" class="btn btn-warning">수정하기!!</a>
+    <a href="{% url 'questions:update' question.id %}" class="btn btn-warning">수정하기!!</a>
     <hr class="my-4">
     
     <a href="" class="btn btn-primary">{{question.choice_1}}</a>

@@ -48,3 +48,14 @@ def detail(request,id):
         'question':question
     }
     return render(request, 'questions/detail.html',context)
+
+def update(request,id):
+    question = get_object_or_404(Question,id=id)
+    if request.method == "POST":
+        pass
+    else:
+        form = QuestionForm(instance=question)
+    context={
+        'form':form,
+    }
+    return render(request, 'questions/form.html', context)
