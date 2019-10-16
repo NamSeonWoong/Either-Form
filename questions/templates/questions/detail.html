@@ -3,7 +3,12 @@
   <div class="jumbotron">
     <h1 class="display-4">{{question.title}}</h1>
     <p class="lead">{{question.choice_1}} VS {{question.choice_2}}</p>
-    <a href="{% url 'questions:update' question.id %}" class="btn btn-warning">수정하기!!</a>
+    <a href="{% url 'questions:update' question.id %}" class="btn btn-info">수정하기!!</a>
+    <form action="{% url 'questions:delete' question.id %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <input type="submit" value="삭제" class="btn btn-danger">
+    </form>
+    
     <hr class="my-4">
     
     <a href="" class="btn btn-primary">{{question.choice_1}}</a>
