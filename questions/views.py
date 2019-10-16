@@ -52,7 +52,10 @@ def detail(request,id):
 def update(request,id):
     question = get_object_or_404(Question,id=id)
     if request.method == "POST":
-        pass
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            return redirect('questions:detail', id)
     else:
         form = QuestionForm(instance=question)
     context={
